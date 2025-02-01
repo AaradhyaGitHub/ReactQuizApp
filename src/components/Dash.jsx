@@ -8,7 +8,7 @@ const DashSection = styled.section`
   gap: 20px;
   display: flex;
   justify-content: space-between; /* Space between the two panels */
-  height: 65vh;
+  height: 55vh;
   width: 70%;
   background: linear-gradient(to right, #c21ad8c6, #aa00ff5c);
   border-radius: 20px; /* Smooth rounded corners */
