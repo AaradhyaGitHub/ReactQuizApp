@@ -3,7 +3,7 @@ export default function Hint() {
     <>
       <div>
         <button>
-            <p>Click for Hint</p>
+          <p>Click for Hint</p>
         </button>
       </div>
     </>

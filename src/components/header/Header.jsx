@@ -5,14 +5,13 @@ import header_logo from "../../assets/quiz-logo.png";
 
 // Styled Components
 const HeaderContainer = styled.header`
-  background-color: red;
   width: 100%;
-  height: 12%;
+  height: 15%;
   padding: 10px;
 `;
 
 const TopSection = styled.div`
-background-color: blue;
+  align-items: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,14 +19,12 @@ background-color: blue;
 `;
 
 const LogoContainer = styled.div`
-background-color: purple;
   display: flex;
   align-items: center;
   gap: 10px; /* Adjusts spacing between logo and text */
 `;
 
 const Logo = styled.img`
-background-color: pink;
   height: 50px; /* Adjust as needed */
 `;
 

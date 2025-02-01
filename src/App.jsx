@@ -1,6 +1,4 @@
-import Dash from "./components/Dash.jsx"
-export default function App(){
-    return(
-        <Dash />
-    )
+import Dash from "./components/Dash.jsx";
+export default function App() {
+  return <Dash />;
 }
