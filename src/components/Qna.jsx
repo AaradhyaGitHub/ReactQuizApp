@@ -5,13 +5,13 @@ const TestArea = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px; /* Space between elements */
+  gap: 10px; /* Space between elements */
   height: 60vh;
   width: 100%;
   background: linear-gradient(to right, #ff00ff76, #aa00ff2f);
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.336);
-  padding: 20px;
+  padding: 10px;
 `;
 
 const QuestionContainer = styled.div`
@@ -67,7 +67,9 @@ export default function QnA() {
           </code>
         </QuestionText>
       </QuestionContainer>
+
       <Timer />
+    
       <AnswerList>
         <li>
           <AnswerButton>Add new tasks to the list.</AnswerButton>
