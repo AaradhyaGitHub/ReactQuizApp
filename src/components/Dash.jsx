@@ -8,7 +8,7 @@ const DashSection = styled.section`
   flex-direction: column;
   align-items: center; /* Centers content horizontally */
   gap: 10px; /* Space between elements */
-  height: 100vh;
+  height: auto;
   width: 70%;
   background: linear-gradient(to right, #c21ad8c6, #aa00ff5c);
   border-radius: 20px;
@@ -26,11 +26,7 @@ export default function Dash() {
   return (
     <DashSection>
       <Header />
-      {examStatus === 'exam-over' ? (
-        <p>Exaxm Over</p>
-      ) : (
-        <QnA status={handleExamStatus} />
-      )}
+      <QnA status={handleExamStatus} />
     </DashSection>
   );
 }

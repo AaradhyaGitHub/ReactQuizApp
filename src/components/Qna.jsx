@@ -2,13 +2,14 @@ import { styled } from "styled-components";
 
 import { QNA } from "../data.js";
 import { useState, useEffect } from "react";
+import QuizOver from "./QuizOver.jsx";
 
 const TestArea = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px; /* Space between elements */
-  height: 60vh;
+  height: auto;
   width: 100%;
   background: linear-gradient(to right, #ff00ff76, #aa00ff2f);
   border-radius: 20px;
@@ -59,15 +60,14 @@ const AnswerButton = styled.button`
   }
 `;
 const Theme1Buttons = styled.button`
-  margin-top: 20%;
-  width: 40%;
-  padding: 30px;
-  font-size: 5rem;
+  margin: 100px;
+  padding: 20px;
+  font-size: 2rem;
   font-weight: bold;
   background: linear-gradient(to right, #ea35a2, #e80be5);
   border: none;
   border-radius: 50px;
-  color: #8de3e0;
+  color: #692d7a;
   cursor: pointer;
   transition: transform 0.2s, background 0.3s;
 
@@ -77,7 +77,7 @@ const Theme1Buttons = styled.button`
   }
 `;
 
-export default function QnA({status}) {
+export default function QnA({ status }) {
   const [currentQuestion, setCurrentQuestion] = useState();
   const [hasExamStarted, setHasExamStarted] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState([]);
@@ -89,9 +89,9 @@ export default function QnA({status}) {
 
   const currentQuestionIndex = QNA[currentQuestion];
 
-   useEffect(() => {
+  useEffect(() => {
     if (currentQuestion >= QNA.length) {
-      status("exam-over");  // ✅ Updates exam status *after* render
+      status("exam-over"); // ✅ Updates exam status *after* render
     }
   }, [currentQuestion, status]);
 
@@ -142,13 +142,13 @@ export default function QnA({status}) {
             </>
           ) : (
             <>
-              <Theme1Buttons> Results</Theme1Buttons>
-              {status("exam-over")}
+              <QuizOver >
+                <h1>QuizOver</h1>
+              </QuizOver>
             </>
           )}
         </>
-      )
-      }
+      )}
     </TestArea>
   );
 }
