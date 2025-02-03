@@ -58,7 +58,7 @@ const AnswerButton = styled.button`
     transform: scale(1.05);
   }
 `;
-const StartButton = styled.button`
+const Theme1Buttons = styled.button`
   margin-top: 20%;
   width: 40%;
   padding: 30px;
@@ -77,7 +77,7 @@ const StartButton = styled.button`
   }
 `;
 
-export default function QnA() {
+export default function QnA({status}) {
   const [currentQuestion, setCurrentQuestion] = useState();
   const [hasExamStarted, setHasExamStarted] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState([]);
@@ -88,6 +88,12 @@ export default function QnA() {
   };
 
   const currentQuestionIndex = QNA[currentQuestion];
+
+   useEffect(() => {
+    if (currentQuestion >= QNA.length) {
+      status("exam-over");  // ✅ Updates exam status *after* render
+    }
+  }, [currentQuestion, status]);
 
   const answerSelected = (option) => {
     setSelectedAnswer((prevSelectedAnswer) => [...prevSelectedAnswer, option]); // Update selected answer
@@ -114,7 +120,7 @@ export default function QnA() {
   return (
     <TestArea>
       {!hasExamStarted ? (
-        <StartButton onClick={startExam}>Start</StartButton>
+        <Theme1Buttons onClick={startExam}>Start</Theme1Buttons>
       ) : (
         <>
           {currentQuestionIndex ? (
@@ -135,10 +141,14 @@ export default function QnA() {
               </AnswerList>
             </>
           ) : (
-            <p>NO!</p>
+            <>
+              <Theme1Buttons> Results</Theme1Buttons>
+              {status("exam-over")}
+            </>
           )}
         </>
-      )}
+      )
+      }
     </TestArea>
   );
 }

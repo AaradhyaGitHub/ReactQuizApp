@@ -8,7 +8,7 @@ const DashSection = styled.section`
   flex-direction: column;
   align-items: center; /* Centers content horizontally */
   gap: 10px; /* Space between elements */
-  height: 78vh;
+  height: 100vh;
   width: 70%;
   background: linear-gradient(to right, #c21ad8c6, #aa00ff5c);
   border-radius: 20px;
@@ -18,11 +18,19 @@ const DashSection = styled.section`
 `;
 
 export default function Dash() {
-  const [examStatus, setExamStatus] = useState('notStarted');
+  const [examStatus, setExamStatus] = useState("notStarted");
+
+  const handleExamStatus = (status) => {
+    setExamStatus(status);
+  };
   return (
     <DashSection>
-      <Header examStatus={examStatus} onStartExam={setExamStatus}/>
-      <QnA examStatus={examStatus} onStartExam={setExamStatus}/>
+      <Header />
+      {examStatus === 'exam-over' ? (
+        <p>Exaxm Over</p>
+      ) : (
+        <QnA status={handleExamStatus} />
+      )}
     </DashSection>
   );
 }
