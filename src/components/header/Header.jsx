@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import Count from "./Count.jsx";
-import Hint from "./Hint.jsx";
 import header_logo from "../../assets/quiz-logo.png";
 
 // Styled Components
@@ -32,14 +30,12 @@ export default function Header() {
   return (
     <HeaderContainer>
       <TopSection>
-        <Count />
 
         <LogoContainer>
           <Logo src={header_logo} alt="clipboard" />
           <h1>React Quiz App</h1>
         </LogoContainer>
 
-        <Hint />
       </TopSection>
     </HeaderContainer>
   );

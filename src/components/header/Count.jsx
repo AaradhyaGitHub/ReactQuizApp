@@ -1,7 +1,7 @@
 export default function Count() {
   return (
     <>
-      <p>11/20</p>
+      <h1>11/20</h1>
     </>
   );
 }

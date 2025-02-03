@@ -24,7 +24,7 @@ const ProgressBar = styled.progress`
   }
 `;
 
-export default function Timer({ timer = 5000 }) {
+export default function Timer({timer} ) {
   const [remainingTime, setRemainingTime] = useState(timer);
 
   useEffect(() => {

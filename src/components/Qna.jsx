@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
 import Timer from "./Timer.jsx";
+import Start from "./Start.jsx";
 import { QNA } from "../data.js";
 import { Fragment } from "react";
+import { useState } from "react";
 
 const TestArea = styled.section`
   display: flex;
@@ -60,29 +62,59 @@ const AnswerButton = styled.button`
 `;
 
 export default function QnA() {
+  const [currentQuestion, setCurrentQuestion] = useState();
+  const [hasExamStarted, setHasExamStarted] = useState(false);
+
+  const startExam = () => {
+    setHasExamStarted(true);
+    setCurrentQuestion(0);
+  };
+
+  const answerSelected = () => {
+    setCurrentQuestion((prevQuestion) => prevQuestion + 1);
+    console.log(currentQuestion)
+  };
+
+  const currentQuestionIndex = QNA[currentQuestion];
+
   return (
     <TestArea>
-      {QNA.map((qna) => (
+      {!hasExamStarted ? (
+        <button onClick={startExam}>Start</button>
+      ) : (
+        <>
+          <QuestionContainer>
+            <QuestionText>
+              <code>{currentQuestionIndex.question}</code>
+            </QuestionText>
+          </QuestionContainer>
+          <AnswerList>
+            {currentQuestionIndex.options.map((option, index) => (
+              <li key={index}>
+                <AnswerButton onClick={answerSelected}>{option}</AnswerButton>
+              </li>
+            ))}
+          </AnswerList>
+        </>
+      )}
+
+      {/* {QNA.map((qna) => (
         <Fragment key={qna.id}>
           <QuestionContainer>
             <QuestionText>
               <code>{qna.question}</code>
             </QuestionText>
           </QuestionContainer>
-          <Timer />
+          <Timer timer = {5000}/>
           <AnswerList>
-            {
-              qna.options.map(
-                (option, index) => (
-                  <li key={index}>
-                    <AnswerButton>{option}</AnswerButton>
-                  </li>
-                )
-              )
-            }
+            {qna.options.map((option, index) => (
+              <li key={index}>
+                <AnswerButton >{option}</AnswerButton>
+              </li>
+            ))}
           </AnswerList>
-          </Fragment>
-      ))}
+        </Fragment>
+      ))} */}
     </TestArea>
   );
 }

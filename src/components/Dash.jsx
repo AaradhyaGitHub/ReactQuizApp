@@ -1,6 +1,7 @@
 import Header from "./header/Header.jsx";
 import QnA from "./Qna.jsx";
 import styled from "styled-components";
+import { useState } from "react";
 
 const DashSection = styled.section`
   display: flex;
@@ -17,10 +18,11 @@ const DashSection = styled.section`
 `;
 
 export default function Dash() {
+  const [examStatus, setExamStatus] = useState('notStarted');
   return (
     <DashSection>
-      <Header />
-      <QnA />
+      <Header examStatus={examStatus} onStartExam={setExamStatus}/>
+      <QnA examStatus={examStatus} onStartExam={setExamStatus}/>
     </DashSection>
   );
 }
