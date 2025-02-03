@@ -1,9 +1,7 @@
 import { styled } from "styled-components";
-import Timer from "./Timer.jsx";
-import Start from "./Start.jsx";
+
 import { QNA } from "../data.js";
-import { Fragment } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TestArea = styled.section`
   display: flex;
@@ -60,27 +58,63 @@ const AnswerButton = styled.button`
     transform: scale(1.05);
   }
 `;
+const StartButton = styled.button`
+  margin-top: 20%;
+  width: 40%;
+  padding: 30px;
+  font-size: 5rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #ea35a2, #e80be5);
+  border: none;
+  border-radius: 50px;
+  color: #8de3e0;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+
+  &:hover {
+    background: linear-gradient(to right, #ff0099, #ff0077);
+    transform: scale(1.05);
+  }
+`;
 
 export default function QnA() {
   const [currentQuestion, setCurrentQuestion] = useState();
   const [hasExamStarted, setHasExamStarted] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState([]);
 
   const startExam = () => {
     setHasExamStarted(true);
     setCurrentQuestion(0);
   };
 
-  const answerSelected = () => {
-    setCurrentQuestion((prevQuestion) => prevQuestion + 1);
-    console.log(currentQuestion)
+  const currentQuestionIndex = QNA[currentQuestion];
+
+  const answerSelected = (option) => {
+    setSelectedAnswer((prevSelectedAnswer) => [...prevSelectedAnswer, option]); // Update selected answer
+    verifyAnswer(option);
+    setCurrentQuestion((prevQuestion) => prevQuestion + 1); // Move to next question
   };
 
-  const currentQuestionIndex = QNA[currentQuestion];
+  const verifyAnswer = (userOption) => {
+    if (currentQuestionIndex.answer === userOption) {
+      console.log("got it");
+    } else {
+      console.log("miss");
+    }
+  };
+
+  // This effect will run when the selectedAnswer changes
+  useEffect(() => {
+    if (selectedAnswer) {
+      // Perform any logic here with the updated selectedAnswer
+      console.log("Updated selected answer: ", selectedAnswer);
+    }
+  }, [selectedAnswer]);
 
   return (
     <TestArea>
       {!hasExamStarted ? (
-        <button onClick={startExam}>Start</button>
+        <StartButton onClick={startExam}>Start</StartButton>
       ) : (
         <>
           <QuestionContainer>
@@ -91,30 +125,14 @@ export default function QnA() {
           <AnswerList>
             {currentQuestionIndex.options.map((option, index) => (
               <li key={index}>
-                <AnswerButton onClick={answerSelected}>{option}</AnswerButton>
+                <AnswerButton onClick={() => answerSelected(option)}>
+                  {option}
+                </AnswerButton>
               </li>
             ))}
           </AnswerList>
         </>
       )}
-
-      {/* {QNA.map((qna) => (
-        <Fragment key={qna.id}>
-          <QuestionContainer>
-            <QuestionText>
-              <code>{qna.question}</code>
-            </QuestionText>
-          </QuestionContainer>
-          <Timer timer = {5000}/>
-          <AnswerList>
-            {qna.options.map((option, index) => (
-              <li key={index}>
-                <AnswerButton >{option}</AnswerButton>
-              </li>
-            ))}
-          </AnswerList>
-        </Fragment>
-      ))} */}
     </TestArea>
   );
 }
