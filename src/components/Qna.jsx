@@ -117,20 +117,26 @@ export default function QnA() {
         <StartButton onClick={startExam}>Start</StartButton>
       ) : (
         <>
-          <QuestionContainer>
-            <QuestionText>
-              <code>{currentQuestionIndex.question}</code>
-            </QuestionText>
-          </QuestionContainer>
-          <AnswerList>
-            {currentQuestionIndex.options.map((option, index) => (
-              <li key={index}>
-                <AnswerButton onClick={() => answerSelected(option)}>
-                  {option}
-                </AnswerButton>
-              </li>
-            ))}
-          </AnswerList>
+          {currentQuestionIndex ? (
+            <>
+              <QuestionContainer>
+                <QuestionText>
+                  <code>{currentQuestionIndex.question}</code>
+                </QuestionText>
+              </QuestionContainer>
+              <AnswerList>
+                {currentQuestionIndex.options.map((option, index) => (
+                  <li key={index}>
+                    <AnswerButton onClick={() => answerSelected(option)}>
+                      {option}
+                    </AnswerButton>
+                  </li>
+                ))}
+              </AnswerList>
+            </>
+          ) : (
+            <p>NO!</p>
+          )}
         </>
       )}
     </TestArea>
