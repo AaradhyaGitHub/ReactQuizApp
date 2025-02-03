@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 import Timer from "./Timer.jsx";
+import { QNA } from "../data.js";
+import { Fragment } from "react";
 
 const TestArea = styled.section`
   display: flex;
@@ -16,11 +18,12 @@ const TestArea = styled.section`
 
 const QuestionContainer = styled.div`
   background: rgba(255, 255, 255, 0.1);
-  padding: 15px;
+  padding: 5px;
   border-radius: 15px;
   text-align: center;
   width: 100%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
 `;
 
 const QuestionText = styled.h1`
@@ -31,10 +34,10 @@ const QuestionText = styled.h1`
 
 const AnswerList = styled.ul`
   list-style: none;
-  padding: 0;
+  padding: 0px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
 `;
 
@@ -59,31 +62,27 @@ const AnswerButton = styled.button`
 export default function QnA() {
   return (
     <TestArea>
-      <QuestionContainer>
-        <QuestionText>
-          <code>
-            You're building a to-do list app in React. The app should allow the
-            user to:
-          </code>
-        </QuestionText>
-      </QuestionContainer>
-
-      <Timer />
-    
-      <AnswerList>
-        <li>
-          <AnswerButton>Add new tasks to the list.</AnswerButton>
-        </li>
-        <li>
-          <AnswerButton>Mark tasks as completed.</AnswerButton>
-        </li>
-        <li>
-          <AnswerButton>Delete tasks from the list.</AnswerButton>
-        </li>
-        <li>
-          <AnswerButton>Share their location</AnswerButton>
-        </li>
-      </AnswerList>
+      {QNA.map((qna) => (
+        <Fragment key={qna.id}>
+          <QuestionContainer>
+            <QuestionText>
+              <code>{qna.question}</code>
+            </QuestionText>
+          </QuestionContainer>
+          <Timer />
+          <AnswerList>
+            {
+              qna.options.map(
+                (option, index) => (
+                  <li key={index}>
+                    <AnswerButton>{option}</AnswerButton>
+                  </li>
+                )
+              )
+            }
+          </AnswerList>
+          </Fragment>
+      ))}
     </TestArea>
   );
 }
